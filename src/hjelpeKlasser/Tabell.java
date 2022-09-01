@@ -121,23 +121,34 @@ public class Tabell {
             throw new NoSuchElementException("a.length (" + n + ") < 2!");
         }
 
-        int m = maks(a);
-        int nm;
+        int m = 0;
+        int nm = 1;
 
-        if (m == 0) {
-            nm = maks(a, 1, n);
+        if (a[1] > a[0]) {
+            m = 1;
+            nm = 0;
         }
 
-        else if (m == n - 1) {
-            nm = maks(a,0,n-1);
-        }
+        int maksverdi = a[m];
+        int nestmaksverdi = a[nm];
 
-        else {
-            int mv = maks(a,0,m);
-            int mh = maks(a, m+1, n);
-            nm = a[mh] > a[mh] ? mh : mv;
-        }
+        for (int i = 2; i < n; i++) {
+            if (a[i] > nestmaksverdi) {
 
+                if (a[i] > maksverdi) {
+
+                    nm = m;
+                    nestmaksverdi = maksverdi;
+
+                    m = i;
+                    maksverdi = a[m];
+                }
+                else {
+                    nm = i;
+                    nestmaksverdi = a[nm];
+                }
+            }
+        }
         return new int[] {m,nm};
     }
 
@@ -172,5 +183,17 @@ public class Tabell {
         skrivIn(a,0,a.length);
     }
 
+    public static void sortering(int[] a) {
+        for (int i = a.length; i > 1; i--) {
+            int m = maks(a,0,i);
+            bytt(a,i-1,m);
+
+        }
+    }
+    public static void kopier(int[] a, int i, int[] b, int j, int ant) {
+        for (int n = i + ant; i < n; ) {
+            b[j++] = a[i++];
+        }
+    }
 }
 
