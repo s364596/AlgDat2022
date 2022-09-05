@@ -3,7 +3,8 @@ package hjelpeKlasser;
 import java.util.*;
 
 public class Tabell {
-    private Tabell() {}
+    private Tabell() {
+    }
 
     public static void fratilKontroll(int tablengde, int fra, int til) {
         if (fra < 0) {
@@ -48,7 +49,9 @@ public class Tabell {
     }
 
     public static void bytt(int[] a, int i, int j) {
-        int temp = a[i]; a[i] = a[j]; a[j] = temp;
+        int temp = a[i];
+        a[i] = a[j];
+        a[j] = temp;
     }
 
     public static int[] randPerm(int n) {
@@ -58,7 +61,7 @@ public class Tabell {
         Arrays.setAll(a, i -> i + 1);
 
         for (int k = n - 1; k > 0; k--) {
-            int i = r.nextInt(k+1);
+            int i = r.nextInt(k + 1);
             bytt(a, k, i);
         }
 
@@ -91,7 +94,7 @@ public class Tabell {
     }
 
     public static int maks(int[] a) {
-        return maks(a,0,a.length);
+        return maks(a, 0, a.length);
     }
 
     public static int min(int[] a, int fra, int til) {
@@ -110,8 +113,9 @@ public class Tabell {
         }
         return m;
     }
+
     public static int min(int[] a) {
-        return min(a,0,a.length);
+        return min(a, 0, a.length);
     }
 
     public static int[] nestMaks(int[] a) {
@@ -142,18 +146,19 @@ public class Tabell {
 
                     m = i;
                     maksverdi = a[m];
-                }
-                else {
+                } else {
                     nm = i;
                     nestmaksverdi = a[nm];
                 }
             }
         }
-        return new int[] {m,nm};
+        return new int[]{m, nm};
     }
 
     public static void bytt(char[] a, int i, int j) {
-        char temp = a[i]; a[i] = a[j]; a[j] = temp;
+        char temp = a[i];
+        a[i] = a[j];
+        a[j] = temp;
     }
 
     public static void skriv(int[] a, int fra, int til) {
@@ -167,8 +172,9 @@ public class Tabell {
             System.out.print(" " + a[i]);
         }
     }
+
     public static void skriv(int[] a) {
-        skriv(a,0,a.length);
+        skriv(a, 0, a.length);
 
     }
 
@@ -179,21 +185,76 @@ public class Tabell {
         System.out.println();
     }
 
-        public static void skrivIn(int[] a) {
-        skrivIn(a,0,a.length);
+    public static void skrivIn(int[] a) {
+        skrivIn(a, 0, a.length);
     }
 
     public static void sortering(int[] a) {
         for (int i = a.length; i > 1; i--) {
-            int m = maks(a,0,i);
-            bytt(a,i-1,m);
+            int m = maks(a, 0, i);
+            bytt(a, i - 1, m);
 
         }
     }
+
     public static void kopier(int[] a, int i, int[] b, int j, int ant) {
         for (int n = i + ant; i < n; ) {
             b[j++] = a[i++];
         }
+    }
+
+    public static void snu(int[] a, int v, int h) {
+        while (v < h) {
+            bytt(a, v++, h--);
+        }
+    }
+
+    public static void snu(int[] a, int v) {
+        snu(a, v, a.length - 1);
+    }
+
+    public static void snu(int[] a) {
+        snu(a, 0, a.length - 1);
+    }
+
+    public static boolean nestePermutasjon(int[] a) {
+        int i = a.length - 2;
+        while (i >= 0 && a[i] > a[i + 1]) {
+            i--;
+        }
+
+        if (i < 0) {
+            return false;
+        }
+
+        int j = a.length - 1;
+        while (a[j] < a[i]) {
+            j--;
+        }
+        bytt(a, i, j);
+        snu(a, i + 1);
+
+        return true;
+    }
+    public static int inversjoner(int[] a) {
+        int antall = 0;
+
+        for (int i = 0; i < a.length - 1; i++) {
+            for (int j = i + 1; j < a.length; j++) {
+                if (a[i] > a[j]) {
+                    antall++;
+                }
+            }
+        }
+        return antall;
+    }
+    public static boolean erSortert(int[] a) {
+        for (int i = 1; i < a.length; i++) {
+            if (a[i-1] > a[i]) {
+                return false;
+            }
+        }
+        return true;
     }
 }
 

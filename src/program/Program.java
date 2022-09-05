@@ -27,40 +27,12 @@ public class Program {
         System.out.println("\n " + nestMaks);
         */
 
-        int[] a = {7, 5, 21, 15, 27, 23, 13, 31, 8, 9, 18, 14, 3};
-        int[] b = nestMaks(a);
 
-        System.out.println(Arrays.toString(b));
 
-    }
+        int[] a = {3, 1, 4, 9, 3, 1};
 
-    public static int[] nestMaks(int[] a) {
-        int n = a.length;
+        Tabell.nestePermutasjon(a);
+        System.out.println(Arrays.toString(a));
 
-        if (n < 2) {
-            throw new IllegalArgumentException("a.length " + n + " < 2!");
-        }
-
-        int[] b = new int[2*n];
-        System.arraycopy(a,0,b,n,n);
-
-        for (int k = 2*n-2; k > 1; k -= 2) {
-            b[k/2] = Math.max(b[k], b[k+1]);
-        }
-
-        int maksverdi = b[1];
-        int nestmaksverdi = Integer.MIN_VALUE;
-
-        for (int m = 2*n - 1, k = 2; k < m; k *= 2) {
-            int tempverdi = b[k+1];
-            if (maksverdi != b[k]) {
-                tempverdi = b[k];
-                k++;
-            }
-            if (tempverdi > nestmaksverdi) {
-                nestmaksverdi = tempverdi;
-            }
-        }
-        return new int[] {maksverdi,nestmaksverdi};
     }
 }
