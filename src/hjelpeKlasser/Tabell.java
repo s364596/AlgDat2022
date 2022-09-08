@@ -236,6 +236,7 @@ public class Tabell {
 
         return true;
     }
+
     public static int inversjoner(int[] a) {
         int antall = 0;
 
@@ -248,13 +249,74 @@ public class Tabell {
         }
         return antall;
     }
+
     public static boolean erSortert(int[] a) {
         for (int i = 1; i < a.length; i++) {
-            if (a[i-1] > a[i]) {
+            if (a[i - 1] > a[i]) {
                 return false;
             }
         }
         return true;
     }
+
+    public static void utvalgssortering(int[] a) {
+        for (int i = 0; i < a.length - 1; i++) {
+            bytt(a, i, min(a, i, a.length));
+        }
+    }
+
+    public static void utvalgssortering(int[] a, int fra, int til) {
+        fratilKontroll(a.length, fra, til);
+
+        for (int i = fra; i < til - 1; i++) {
+            bytt(a, i, min(a, i, til));
+        }
+    }
+
+    public static int usortertsøk(int[] a, int verdi) {
+        for (int i = 0; i < a.length; i++) {
+            if (verdi == a[i]) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public static int lineærsøk(int[] a, int verdi) {
+        if (a.length == 0 || verdi > a[a.length - 1]) {
+            return -(a.length + 1);
+        }
+
+        int i = 0;
+        for (; a[i] < verdi; i++) ;
+        return verdi == a[i] ? i : -(i + 1);
+    }
+
+    public static int binærsøk(int[] a, int fra, int til, int verdi) {
+        Tabell.fratilKontroll(a.length, fra, til);
+        int v = fra, h = til - 1;
+
+        while (v < h) {
+            int m = (v + h / 2);
+
+            if (verdi > a[m]) {
+                v = m + 1;
+            } else {
+                h = m;
+            }
+        }
+        if (h < v || verdi < a[v]) {
+            return -(v + 1);
+        } else if (verdi == a[v]) {
+            return v;
+        } else {
+            return -(v + 2);
+        }
+    }
+    public static int binærsøk(int[] a, int verdi) {
+        return binærsøk(a,0,a.length,verdi);
+    }
 }
+
+
 
