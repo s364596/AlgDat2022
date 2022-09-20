@@ -316,6 +316,85 @@ public class Tabell {
     public static int binærsøk(int[] a, int verdi) {
         return binærsøk(a,0,a.length,verdi);
     }
+
+    public static int maks(double[] a) {
+        int m = 0;
+        double maksverdi = a[0];
+
+        for (int i = 1; i < a.length; i++) {
+            if (a[i] > maksverdi) {
+                maksverdi = a[i];
+                m = i;
+            }
+        }
+        return m;
+    }
+
+    public static int maks(String[] a) {
+        int m = 0;
+        String maksverdi = a[0];
+
+        for (int i = 1; i < a.length; i++) {
+            if (a[i].compareTo(maksverdi) > 0) {
+                maksverdi = a[i];
+                m = i;
+            }
+        }
+        return m;
+    }
+
+        public static int maks(char[] a) {
+            int m = 0;
+            char maksverdi = a[0];
+
+            for (int i = 1; i < a.length; i++) {
+                if (a[i] > maksverdi) {
+                    maksverdi = a[i];
+                    m = i;
+                }
+            }
+            return m;
+    }
+
+
+    public static int maks(Integer[] a){
+        int m = 0;
+        Integer maksverdi = a[0];
+
+        for (int i = 1; i < a.length; i++) {
+            if(a[i].compareTo(maksverdi) > 0) {
+                maksverdi = a[i];
+                m = i;
+            }
+        }
+        return m;
+    }
+
+    public static <T extends Comparable<? super T>> int maks(T[] a) {
+        int m = 0;
+        T maksverdi = a[0];
+
+        for (int i = 1; i < a.length; i++) {
+            if (a[i].compareTo(maksverdi) > 0) {
+                maksverdi = a[i];
+                m = i;
+            }
+
+        }
+        return m;
+    }
+
+    public static <T extends Comparable<? super T>> void innsettingssortering(T[] a) {
+        for (int i = 1; i < a.length; i++) {
+            T verdi = a[i];
+            int j = i-1;
+
+            for (; j >= 0 && verdi.compareTo(a[j]) < 0 ; j--) {
+                a[j + 1] = a[j];
+            }
+            a[j + 1] = verdi;
+        }
+    }
 }
 
 
